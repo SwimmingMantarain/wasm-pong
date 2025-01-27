@@ -17,7 +17,7 @@ async fn main() {
     let mut ball_y = screen_height() / 2.0 - BALL_SIZE / 2.0;
 
     let mut ball_speed_x = 150;
-    let mut ball_speed_y = rand::gen_range(-150, 150);
+    let mut ball_speed_y = rand::gen_range(-50, 50);
 
     let mut score = 0;
     let mut bot_score = 0;
@@ -135,9 +135,9 @@ async fn main() {
         if check_paddle_col_player(ball_x, ball_y, player_x, player_y) {
             ball_speed_x = {
                 if ball_speed_x > 0 {
-                    ball_speed_x
+                    ball_speed_x + 50
                 } else {
-                    -ball_speed_x
+                    -ball_speed_x + 50
                 }
             };
         }
@@ -147,9 +147,9 @@ async fn main() {
         if check_paddle_col_bot(ball_x, ball_y, bot_x, bot_y) {
             ball_speed_x = {
                 if ball_speed_x > 0 {
-                    -ball_speed_x
+                    -ball_speed_x - 50
                 } else {
-                    ball_speed_x
+                    ball_speed_x + 50
                 }
             };
         }

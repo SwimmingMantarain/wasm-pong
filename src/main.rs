@@ -50,6 +50,17 @@ async fn main() {
         );
 
         // Check for input
+        for touch in touches() {
+            let pos = touch.position;
+            player_y = pos.y - PADDLE_H / 2.0;
+            // Check for cheating
+            if player_y < 0. {
+                player_y = 0.;
+            }
+            if player_y > screen_height() - PADDLE_H {
+                player_y = screen_height() - PADDLE_H;
+            }
+        }
         
         if is_mouse_button_down(MouseButton::Left) {
             player_y = mouse_position().1 - PADDLE_H / 2.0;

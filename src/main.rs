@@ -1,4 +1,4 @@
-use macroquad::prelude::*;
+use macroquad::{prelude::*, ui::{hash, root_ui, widgets, Skin}};
 
 const PADDLE_W: f32 = 20.0;
 const PADDLE_H: f32 = 100.0;
@@ -39,7 +39,6 @@ async fn main() {
         draw_rectangle(ball_x, ball_y, BALL_SIZE, BALL_SIZE, GREEN);
 
         // Draw the famous line
-
         draw_line(
             screen_width() / 2.0,
             0.0,
@@ -48,6 +47,38 @@ async fn main() {
             2.0,
             GREEN,
         );
+
+        // Customize button style with green border
+        let button_style = root_ui()
+            .style_builder()
+            .background(
+                Image::from_file_with_format(
+                    include_bytes!("wasm-pong_button_background.png"),
+                     None
+                    ).unwrap())
+            .background_hovered(
+                Image::from_file_with_format(
+                    include_bytes!("wasm-pong_button_bg_clicked.png"),
+                     None
+                ).unwrap()
+            )
+            .text_color(Color::from_rgba(0, 255, 0, 255))
+            .text_color_hovered(Color::from_rgba(0, 255, 0, 255))
+            .text_color_clicked(Color::from_rgba(0, 255, 0, 255))
+            .font_size(20)
+            .build();
+
+        let button_skin = Skin {
+            button_style: button_style,
+            ..root_ui().default_skin()
+        };
+
+        // Mode toggle button
+        root_ui().push_skin(&button_skin);
+        if root_ui().button(vec2(screen_width() - 100.0, 10.0), "Mode") {
+            println!("oiadfjoaij");
+        };
+        root_ui().pop_skin();
 
         // Check for input
         for touch in touches() {

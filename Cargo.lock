@@ -437,7 +437,7 @@ dependencies = [
 
 [[package]]
 name = "wasm-pong"
-version = "0.1.2"
+version = "0.1.4"
 dependencies = [
  "getrandom",
  "macroquad",
